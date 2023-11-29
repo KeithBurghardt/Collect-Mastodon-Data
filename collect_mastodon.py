@@ -26,6 +26,7 @@ def get_process_count(pname):
     for p, cnt in process_ctr.items():
         if pname in p:
             return cnt
+    return 0
 
 for instance in instances[min_inst:max_inst]:    
     try:
@@ -35,7 +36,7 @@ time.sleep(timeout)
 while True:
     time.sleep(int(timeout/10))
     for instance in instances[min_inst:max_inst]:
-        try:
+        try:            
             all_files = glob('mastodon_data/'+instance.replace('.','-')+'_stream_*.txt')
             if len(all_files) > 0:
                 latest_file = max(all_files, key=os.path.getctime)
